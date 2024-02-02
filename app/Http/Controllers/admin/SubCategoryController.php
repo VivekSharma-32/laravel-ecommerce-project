@@ -38,7 +38,7 @@ class SubCategoryController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'slug' => 'required|unique:sub_category',
+            'slug' => 'required|unique:sub_categories',
             'category' => 'required',
             'status' => 'required'
         ]);

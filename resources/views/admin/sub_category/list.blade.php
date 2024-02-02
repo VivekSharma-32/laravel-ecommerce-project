@@ -6,10 +6,10 @@
         <div class="container-fluid my-2">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sub Categories</h1>
+                    <h1>Categories</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="{{ route('sub-categories.create') }}" class="btn btn-primary">New Sub Category</a>
+                    <a href="{{ route('categories.create') }}" class="btn btn-primary">New Sub-category</a>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <button type="button" onclick='window.location.href="{{ route('sub-categories.index') }}"'
+                            <button type="button" onclick='window.location.href="{{ route('categories.index') }}"'
                                 class="btn btn-default btn-sm">Reset</button>
                         </div>
                         <div class="card-tools">
