@@ -70,4 +70,56 @@ class SubCategoryController extends Controller
             ]);
         }
     }
+
+    public function edit($id, Request $request)
+    {
+        $subCategory = SubCategory::find($id);
+        if (empty($subCategory)) {
+            return redirect()->route('admin.sub_category.index');
+        }
+
+        $categories = Category::orderBy('name', 'ASC')->get();
+        $data['categories'] = $categories;
+        $data['subCategory'] = $subCategory;
+
+        return view('admin.sub_category.edit', $data);
+    }
+
+    public function update($id, Request $request)
+    {
+
+        $subCategory = SubCategory::find($id);
+        if (empty($subCategory)) {
+            // return redirect()->route('admin.sub_category.index'); 
+            return response()->json([
+                'status' => false,
+                'notFound' => true,
+            ]);
+        }
+
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            // 'slug' => 'required|unique:categories,slug,' . $category->id . ',id'
+        ]);
+
+        if ($validator->passes()) {
+            // $category->name = $request->name;
+            // $category->slug = $request->slug;
+            // $category->status = $request->status;
+            // $category->save();
+
+
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Category updated successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
+    }
 }
