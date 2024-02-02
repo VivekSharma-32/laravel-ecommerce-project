@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,12 @@ Route::group(['prefix' => 'admin'], function () {
         // temp-images.create
         Route::post('/upload-temp-image', [TempImagesController::class, 'create'])->name('temp-images.create');
 
+        // Subcategory Routes 
+        Route::get('/sub-categories', [CategoryController::class, 'index'])->name('sub-categories.index');
+        Route::get('/sub-categories/create', [SubCategoryController::class, 'create'])->name('sub-categories.create');
+        Route::post('/sub-categories', [SubCategoryController::class, 'store'])->name('sub-categories.store');
+
+        // Get Slug from the db and change according to the name of the input field
         Route::get('/getSlug', function (Request $request) {
             $slug = '';
             if (!empty($request->title)) {
