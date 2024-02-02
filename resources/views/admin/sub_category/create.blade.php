@@ -10,7 +10,7 @@
                     <h1>Create Sub Category</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="subcategory.html" class="btn btn-primary">Back</a>
+                    <a href="{{ route('sub-categories.index') }}" class="btn btn-primary">Back</a>
                 </div>
             </div>
         </div>

@@ -6,10 +6,10 @@
         <div class="container-fluid my-2">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Categories</h1>
+                    <h1>Sub Categories</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="{{ route('categories.create') }}" class="btn btn-primary">New Sub-category</a>
+                    <a href="{{ route('sub-categories.create') }}" class="btn btn-primary">New Sub Category</a>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <button type="button" onclick='window.location.href="{{ route('categories.index') }}"'
+                            <button type="button" onclick='window.location.href="{{ route('sub-categories.index') }}"'
                                 class="btn btn-default btn-sm">Reset</button>
                         </div>
                         <div class="card-tools">
@@ -46,6 +46,7 @@
                                 <tr>
                                     <th width="60">ID</th>
                                     <th>Name</th>
+                                    <th>Category</th>
                                     <th>Slug</th>
                                     <th width="100">Status</th>
                                     <th width="100">Action</th>
@@ -57,6 +58,7 @@
                                         <tr>
                                             <td>{{ $subCategory->id }}</td>
                                             <td>{{ $subCategory->name }}</td>
+                                            <td>{{ $subCategory->categoryName }}</td>
                                             <td>{{ $subCategory->slug }}</td>
                                             <td>
                                                 @if ($subCategory->status == 1)

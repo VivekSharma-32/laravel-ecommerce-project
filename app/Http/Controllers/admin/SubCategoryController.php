@@ -12,10 +12,13 @@ class SubCategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $subCategories = SubCategory::latest('id');
+        $subCategories = SubCategory::select('sub_categories.*', 'categories.name as categoryName')
+            ->latest('sub_categories.id')
+            ->leftJoin('categories', 'categories.id', 'sub_categories.category_id');
 
         if (!empty($request->get('keyword'))) {
-            $categories = $subCategories->where('name', 'like', '%' . $request->get('keyword') . '%');
+            $categories = $subCategories->where('sub_categories.name', 'like', '%' . $request->get('keyword') . '%');
+            $categories = $subCategories->orWhere('categories.name', 'like', '%' . $request->get('keyword') . '%');
         }
 
 
