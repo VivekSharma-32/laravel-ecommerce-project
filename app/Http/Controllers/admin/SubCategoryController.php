@@ -100,20 +100,21 @@ class SubCategoryController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            // 'slug' => 'required|unique:categories,slug,' . $category->id . ',id'
+            'slug' => 'required|unique:sub_categories,slug,' . $subCategory->id . ',id'
         ]);
 
         if ($validator->passes()) {
-            // $category->name = $request->name;
-            // $category->slug = $request->slug;
-            // $category->status = $request->status;
-            // $category->save();
+            $subCategory->name = $request->name;
+            $subCategory->slug = $request->slug;
+            $subCategory->status = $request->status;
+            $subCategory->category_id = $request->category;
+            $subCategory->save();
 
-
+            // session response 
 
             return response()->json([
                 'status' => true,
-                'message' => 'Category updated successfully'
+                'message' => 'Sub Category updated successfully'
             ]);
         } else {
             return response()->json([
@@ -121,5 +122,25 @@ class SubCategoryController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
+    }
+
+    public function destroy($id, Request $request)
+    {
+        $subCategory = SubCategory::find($id);
+        if (empty($subCategory)) {
+            // return redirect()->route('admin.sub_category.index'); 
+            return response()->json([
+                'status' => false,
+                'notFound' => true,
+            ]);
+        }
+
+        $subCategory->delete();
+
+        // session message 
+        return response()->json([
+            'status' => true,
+            'message' => "Sub category successfully deleted!!!"
+        ]);
     }
 }

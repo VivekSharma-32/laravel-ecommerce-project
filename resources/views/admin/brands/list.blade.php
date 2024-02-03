@@ -6,10 +6,10 @@
         <div class="container-fluid my-2">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sub Categories</h1>
+                    <h1>Brands</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="{{ route('sub-categories.create') }}" class="btn btn-primary">New Sub Category</a>
+                    <a href="{{ route('brands.create') }}" class="btn btn-primary">New Brand</a>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <button type="button" onclick='window.location.href="{{ route('sub-categories.index') }}"'
+                            <button type="button" onclick='window.location.href="{{ route('brands.index') }}"'
                                 class="btn btn-default btn-sm">Reset</button>
                         </div>
                         <div class="card-tools">
@@ -46,22 +46,20 @@
                                 <tr>
                                     <th width="60">ID</th>
                                     <th>Name</th>
-                                    <th>Category</th>
                                     <th>Slug</th>
                                     <th width="100">Status</th>
                                     <th width="100">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($subCategories->isNotEmpty())
-                                    @foreach ($subCategories as $subCategory)
+                                @if ($brands->isNotEmpty())
+                                    @foreach ($brands as $brand)
                                         <tr>
-                                            <td>{{ $subCategory->id }}</td>
-                                            <td>{{ $subCategory->name }}</td>
-                                            <td>{{ $subCategory->categoryName }}</td>
-                                            <td>{{ $subCategory->slug }}</td>
+                                            <td>{{ $brand->id }}</td>
+                                            <td>{{ $brand->name }}</td>
+                                            <td>{{ $brand->slug }}</td>
                                             <td>
-                                                @if ($subCategory->status == 1)
+                                                @if ($brand->status == 1)
                                                     <svg class="text-success-500 h-6 w-6 text-success"
                                                         xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -80,7 +78,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('sub-categories.edit', $subCategory->id) }}">
+                                                <a href="{{ route('brands.edit', $brand->id) }}">
                                                     <svg class="filament-link-icon w-4 h-4 mr-1"
                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                         fill="currentColor" aria-hidden="true">
@@ -89,7 +87,7 @@
                                                         </path>
                                                     </svg>
                                                 </a>
-                                                <a href="#" onclick="deleteSubCategory({{ $subCategory->id }})"
+                                                <a href="#" onclick="deleteBrand({{ $brand->id }})"
                                                     class="text-danger w-4 h-4 mr-1">
                                                     <svg wire:loading.remove.delay="" wire:target=""
                                                         class="filament-link-icon w-4 h-4 mr-1"
@@ -112,7 +110,7 @@
                         </table>
                     </div>
                     <div class="card-footer clearfix">
-                        {{ $subCategories->links() }}
+                        {{ $brands->links() }}
                     </div>
                 </div>
             </form>
@@ -124,8 +122,8 @@
 
 @section('customJs')
     <script>
-        function deleteSubCategory(id) {
-            var url = "{{ route('sub-categories.delete', 'ID') }}"
+        function deleteBrand(id) {
+            var url = "{{ route('brands.delete', 'ID') }}"
             var newUrl = url.replace('ID', id);
             if (confirm("Are you sure you want to delete?")) {
                 $.ajax({
@@ -137,7 +135,9 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        window.location.href = "{{ route('sub-categories.index') }}"
+                        if (response['status']) {
+                            window.location.href = "{{ route('brands.index') }}"
+                        }
                     }
                 })
             }
