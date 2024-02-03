@@ -85,7 +85,8 @@
             e.preventDefault();
             var element = $(this);
 
-            $('button[type=submit]').prop('disabled', true)
+            $('button[type=submit]').prop('disabled', true);
+
             $.ajax({
                 url: "{{ route('sub-categories.store') }}",
                 type: "post",
