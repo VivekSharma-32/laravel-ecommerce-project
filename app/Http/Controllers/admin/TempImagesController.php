@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class TempImagesController extends Controller
 {
 
+    // This method will save the images in the database 
     public function create(Request $request)
     {
         $image = $request->image;

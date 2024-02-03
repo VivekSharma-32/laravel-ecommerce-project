@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ProductSubCategoryController extends Controller
 {
+    // This method will show the dropdown data 
     public function index(Request $request)
     {
 

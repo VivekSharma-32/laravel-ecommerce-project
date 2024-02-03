@@ -13,6 +13,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class CategoryController extends Controller
 {
+    // This method will list down all the categories in the categories page 
     public function index(Request $request)
     {
 
@@ -35,6 +36,7 @@ class CategoryController extends Controller
         return view('admin.category.create');
     }
 
+    // This method will store the data in the database 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -90,6 +92,7 @@ class CategoryController extends Controller
         }
     }
 
+    // This method will show the edit form 
     public function edit($categoryId, Request $request)
     {
         $category = Category::find($categoryId);
@@ -100,6 +103,7 @@ class CategoryController extends Controller
         return view('admin.category.edit', compact('category'));
     }
 
+    // This method will update the data in the database 
     public function update($categoryId, Request $request)
     {
         $category = Category::find($categoryId);
@@ -169,6 +173,7 @@ class CategoryController extends Controller
         }
     }
 
+    // This method will delete the category from the database 
     public function destroy($categoryId, Request $request)
     {
         $category = Category::find($categoryId);

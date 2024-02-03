@@ -14,6 +14,7 @@ class AdminLoginController extends Controller
         return view('admin.login');
     }
 
+    // This method will authenticate the user and redirect to the dashboard page
     public function authenticate(Request $request)
     {
         $validator = Validator::make($request->all(), [

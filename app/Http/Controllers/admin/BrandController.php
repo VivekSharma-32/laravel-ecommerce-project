@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
 {
+    // This method will show the brands page 
     public function index(Request $request)
     {
         $brands = Brand::latest('id');
@@ -22,12 +23,13 @@ class BrandController extends Controller
         return view('admin.brands.list', compact('brands'));
     }
 
+    // This method will show the create form page 
     public function create()
     {
-        //
         return view('admin.brands.create');
     }
 
+    // This method will store the data in the database 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -54,6 +56,7 @@ class BrandController extends Controller
         }
     }
 
+    // This method will redirect to the edit brand page 
     public function edit($id, Request $request)
     {
         $brand = Brand::find($id);
@@ -67,6 +70,7 @@ class BrandController extends Controller
         return view('admin.brands.edit', $data);
     }
 
+    // This method will update the brand 
     public function update($id, Request $request)
     {
         $brand = Brand::find($id);
@@ -103,6 +107,7 @@ class BrandController extends Controller
         }
     }
 
+    // This method will delete the brands data 
     public function destroy($id, Request $request)
     {
         $brand = Brand::find($id);

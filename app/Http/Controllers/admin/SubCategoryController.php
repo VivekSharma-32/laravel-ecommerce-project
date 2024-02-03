@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class SubCategoryController extends Controller
 {
+    // This method will show the subcategories page 
     public function index(Request $request)
     {
         $subCategories = SubCategory::select('sub_categories.*', 'categories.name as categoryName')
@@ -29,6 +30,7 @@ class SubCategoryController extends Controller
         return view('admin.sub_category.list', compact('subCategories'));
     }
 
+    // This method will show the sub category form 
     public function create()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
@@ -36,6 +38,7 @@ class SubCategoryController extends Controller
         return view('admin.sub_category.create', $data);
     }
 
+    // This method will store the data in the database 
     public function store(Request $request)
     {
 
@@ -71,6 +74,7 @@ class SubCategoryController extends Controller
         }
     }
 
+    // This method will display the edit sub category form 
     public function edit($id, Request $request)
     {
         $subCategory = SubCategory::find($id);
@@ -85,6 +89,7 @@ class SubCategoryController extends Controller
         return view('admin.sub_category.edit', $data);
     }
 
+    // This method will update the subcategories data 
     public function update($id, Request $request)
     {
 
@@ -124,6 +129,7 @@ class SubCategoryController extends Controller
         }
     }
 
+    // This method will delete the subcategory from the database 
     public function destroy($id, Request $request)
     {
         $subCategory = SubCategory::find($id);

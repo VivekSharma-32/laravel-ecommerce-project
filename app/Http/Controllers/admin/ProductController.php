@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    // This method will create the new product 
     public function create()
     {
 
@@ -21,7 +22,7 @@ class ProductController extends Controller
         return view('admin.products.create', $data);
     }
 
-
+    // This method will save the data into Database 
     public function store(Request $request)
 
     {
