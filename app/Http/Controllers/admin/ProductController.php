@@ -200,52 +200,6 @@ class ProductController extends Controller
             $product->is_featured = $request->is_featured;
             $product->save();
 
-            // Save Gallery pics 
-            // if (!empty($request->image_array)) {
-            //     foreach ($request->image_array as $temp_image_id) {
-
-            //         $tempImageInfo = TempImage::find($temp_image_id);
-            //         $extArray = explode(".", $tempImageInfo->name);
-            //         $ext = last($extArray); // like jpeg, png,gif, <etc class=""></etc>
-
-            //         $productImage = new ProductImage();
-            //         $productImage->product_id = $product->id;
-            //         $productImage->image = 'NULL';
-            //         $productImage->save();
-
-            //         $imageName = $product->id . '-' . $productImage->id . '-' . time() . '.' . $ext;
-
-            //         $productImage->image = $imageName;
-            //         $productImage->save();
-
-            //         // Generate product Thumbnail;
-
-            //         // large image 
-            //         $sourcePath = public_path() . '/temp/' . $tempImageInfo->name;
-            //         $destPath = public_path() . '/uploads/product/large/' . $imageName;
-
-            //         File::copy($sourcePath, $destPath);
-
-
-            //         $manager = new ImageManager(Driver::class);
-            //         $image = $manager->read($destPath);
-
-            //         $image->resize(1400, 1400);
-
-            //         $image->save($destPath);
-            //         // Small image 
-            //         $destPath = public_path() . '/uploads/product/small/' . $imageName;
-            //         File::copy($sourcePath, $destPath);
-
-            //         $manager = new ImageManager(Driver::class);
-            //         $image = $manager->read($destPath);
-
-            //         $image->cover(300, 300);
-            //         $image->toPng()->save($destPath);
-
-            //         $image->save($destPath);
-            //     }
-            // }
             // session message here 
             return response()->json([
                 'status' => true,
@@ -257,5 +211,40 @@ class ProductController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
+    }
+
+    // delete product data from the db 
+    public function destroy($id, Request $request)
+    {
+        $product = Product::find($id);
+
+        if (empty($product)) {
+            // session messege for error
+            return response()->json([
+                'status' => false,
+                'notFound' => true
+            ]);
+        }
+
+        $productImages = ProductImage::where("product_id", $id)->get();
+
+        if (!empty($productImages)) {
+            foreach ($productImages as $productImage) {
+
+                File::delete(public_path('uploads/product/large/' . $productImage->image));
+                File::delete(public_path('uploads/product/small/' . $productImage->image));
+            }
+
+            ProductImage::where("product_id", $id)->delete();
+        }
+
+        $product->delete();
+
+        // session message for success
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Product deleted successfully'
+        ]);
     }
 }
