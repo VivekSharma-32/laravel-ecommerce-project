@@ -7,7 +7,7 @@
         <div class="container-fluid my-2">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Create Sub Category</h1>
+                    <h1>Edit Sub Category</h1>
                 </div>
                 <div class="col-sm-6 text-right">
                     <a href="{{ route('sub-categories.index') }}" class="btn btn-primary">Back</a>
@@ -51,7 +51,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="email">Slug</label>
-                                    <input type="text" readonly name="slug" id="slug" class="form-control"
+                                    <input type="text" name="slug" id="slug" class="form-control"
                                         placeholder="Slug" value="{{ $subCategory->slug }}">
                                     <p></p>
                                 </div>
@@ -66,6 +66,18 @@
                                             Block</option>
                                     </select>
                                     <p></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="showHome">Show on Home</label>
+                                    <select name="showHome" id="showHome" class="form-control">
+                                        <option {{ $subCategory->showHome == 'Yes' ? 'selected' : '' }} value="Yes">Yes
+                                        </option>
+                                        <option {{ $subCategory->showHome == 'No' ? 'selected' : '' }} value="No">No
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

@@ -49,7 +49,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="email">Slug</label>
-                                    <input type="text" readonly name="slug" id="slug" class="form-control"
+                                    <input type="text" name="slug" id="slug" class="form-control"
                                         placeholder="Slug">
                                     <p></p>
                                 </div>
