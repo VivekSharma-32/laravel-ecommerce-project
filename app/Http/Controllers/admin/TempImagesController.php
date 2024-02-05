@@ -15,8 +15,8 @@ class TempImagesController extends Controller
     // This method will save the images in the database 
     public function create(Request $request)
     {
-        $image = $request->image;
         if (!empty($image)) {
+            $image = $request->image;
             $ext = $image->getClientOriginalExtension();
             $newName = time() . '.' . $ext;
 
