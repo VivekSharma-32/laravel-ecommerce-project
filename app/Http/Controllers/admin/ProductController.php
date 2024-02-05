@@ -6,11 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\TempImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ProductController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $products = Product::latest('id')->with('product_images');
+        // dd($products);
+        if (!empty($request->get('keyword'))) {
+            $products = $products->where('title', 'like', '%' . $request->get('keyword') . '%');
+        }
+        $products = $products->paginate(10);
+
+        $data['products'] = $products;
+        return view('admin.products.list', $data);
+    }
     // This method will create the new product 
     public function create()
     {
@@ -26,7 +44,6 @@ class ProductController extends Controller
     public function store(Request $request)
 
     {
-
         $rules = [
             'title' => 'required',
             'slug' => 'required|unique:products',
@@ -61,8 +78,53 @@ class ProductController extends Controller
             $product->is_featured = $request->is_featured;
             $product->save();
 
-            // session message here 
+            // Save Gallery pics 
+            if (!empty($request->image_array)) {
+                foreach ($request->image_array as $temp_image_id) {
 
+                    $tempImageInfo = TempImage::find($temp_image_id);
+                    $extArray = explode(".", $tempImageInfo->name);
+                    $ext = last($extArray); // like jpeg, png,gif, <etc class=""></etc>
+
+                    $productImage = new ProductImage();
+                    $productImage->product_id = $product->id;
+                    $productImage->image = 'NULL';
+                    $productImage->save();
+
+                    $imageName = $product->id . '-' . $productImage->id . '-' . time() . '.' . $ext;
+
+                    $productImage->image = $imageName;
+                    $productImage->save();
+
+                    // Generate product Thumbnail;
+
+                    // large image 
+                    $sourcePath = public_path() . '/temp/' . $tempImageInfo->name;
+                    $destPath = public_path() . '/uploads/product/large/' . $imageName;
+
+                    File::copy($sourcePath, $destPath);
+
+
+                    $manager = new ImageManager(Driver::class);
+                    $image = $manager->read($destPath);
+
+                    $image->resize(1400, 1400);
+
+                    $image->save($destPath);
+                    // Small image 
+                    $destPath = public_path() . '/uploads/product/small/' . $imageName;
+                    File::copy($sourcePath, $destPath);
+
+                    $manager = new ImageManager(Driver::class);
+                    $image = $manager->read($destPath);
+
+                    $image->cover(300, 300);
+                    $image->toPng()->save($destPath);
+
+                    $image->save($destPath);
+                }
+            }
+            // session message here 
             return response()->json([
                 'status' => true,
                 'message' => "Product created successfully."
