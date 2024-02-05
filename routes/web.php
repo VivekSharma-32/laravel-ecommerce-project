@@ -8,25 +8,18 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProductSubCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('admin.login');
-});
 
+//  Frontend Routes  
+Route::get('/', [FrontController::class, 'index'])->name('front.home');
+
+
+// Admin Routes 
 Route::get('/admin/login', [AdminLoginController::class, 'index'])->name('admin.login');
 
 Route::group(['prefix' => 'admin'], function () {
