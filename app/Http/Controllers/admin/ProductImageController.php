@@ -15,12 +15,16 @@ class ProductImageController extends Controller
     {
 
         $image = $request->image;
+
         $ext = $image->getClientOriginalExtension();
+
+
         $sourcePath = $image->getPathName();
+
 
         $productImage = new ProductImage();
         $productImage->product_id = $request->product_id;
-        $productImage->image = 'NULL';
+        $productImage->image = null;
         $productImage->save();
 
         $imageName = $request->product_id . '-' . $productImage->id . '-' . time() . '.' . $ext;

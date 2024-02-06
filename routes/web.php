@@ -9,11 +9,10 @@ use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\ProductSubCategoryController;
+use App\Http\Controllers\admin\ProductSubCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-
 
 //  Frontend Routes  
 Route::get('/', [FrontController::class, 'index'])->name('front.home');

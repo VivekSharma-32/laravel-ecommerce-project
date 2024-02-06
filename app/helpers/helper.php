@@ -8,5 +8,6 @@ function getCategories()
         ->where('showHome', 'Yes')
         ->where('status', 1)
         ->with('sub_category')
+        ->orderBy('id', 'DESC')
         ->get();
 }
