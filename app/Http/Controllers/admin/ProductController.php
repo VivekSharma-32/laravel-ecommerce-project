@@ -128,6 +128,7 @@ class ProductController extends Controller
                 }
             }
             // session message here 
+            session()->flash('success', 'Product created successfully');
             return response()->json([
                 'status' => true,
                 'message' => "Product created successfully."
@@ -205,6 +206,7 @@ class ProductController extends Controller
             $product->save();
 
             // session message here 
+            session()->flash('success', 'Product updated successfully');
             return response()->json([
                 'status' => true,
                 'message' => "Product updated successfully."
@@ -246,6 +248,7 @@ class ProductController extends Controller
 
         // session message for success
 
+        session()->flash('success', 'Product deleted successfully');
         return response()->json([
             'status' => true,
             'message' => 'Product deleted successfully'

@@ -41,6 +41,7 @@ class TempImagesController extends Controller
             $image->cover(300, 275);
             $image->toPng()->save($destPath);
 
+            session()->flash('success', 'Image uploaded successfully');
             return response()->json([
                 'status' => true,
                 'image_id' => $tempImage->id,

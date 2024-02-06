@@ -79,7 +79,7 @@ class CategoryController extends Controller
                 $category->save();
             }
 
-            // $request->session()->flash('status', 'Task was successful!');
+            session()->flash('success', 'Category added successfully');
 
             return response()->json([
                 'status' => true,
@@ -109,6 +109,8 @@ class CategoryController extends Controller
     {
         $category = Category::find($categoryId);
         if (empty($category)) {
+
+            session()->flash('error', 'Category not found.');
             return response()->json([
                 'status' => false,
                 'notFound' => true,
@@ -163,6 +165,8 @@ class CategoryController extends Controller
 
             // $request->session()->flash('status', 'Task was successful!');
 
+            session()->flash('success', 'Category updated successfully');
+
             return response()->json([
                 'status' => true,
                 'message' => 'Category updated successfully'
@@ -194,6 +198,7 @@ class CategoryController extends Controller
 
         $category->delete();
 
+        session()->flash('success', 'Category deleted successfully');
         return response()->json([
             'status' => true,
             'message' => 'Category deleted successfully.'

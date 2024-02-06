@@ -43,7 +43,7 @@ class BrandController extends Controller
             $brand->slug = $request->slug;
             $brand->status = $request->status;
             $brand->save();
-
+            session()->flash('success', 'Brand added successfully');
             return response()->json([
                 'status' => true,
                 'message' => "Brand added successfully"
@@ -95,6 +95,7 @@ class BrandController extends Controller
             $brand->status = $request->status;
             $brand->save();
 
+            session()->flash('success', 'Brand updated successfully');
             return response()->json([
                 'status' => true,
                 'message' => 'Brand upated successfully'
@@ -114,6 +115,7 @@ class BrandController extends Controller
         if (empty($brand)) {
             // Session message below here
 
+            session()->flash('error', 'Brand not found');
             return response()->json([
                 'status' => false,
                 'notFound' => true,
@@ -125,6 +127,7 @@ class BrandController extends Controller
 
         $brand->delete();
 
+        session()->flash('success', 'Brand deleted successfully');
         return response()->json([
             'status' => true,
             'message' => 'Brand deleted successfully.'

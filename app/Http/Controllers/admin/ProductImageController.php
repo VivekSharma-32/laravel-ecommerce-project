@@ -55,6 +55,7 @@ class ProductImageController extends Controller
 
         $image->save($destPath);
 
+        session()->flash('success', 'Image saved successfully');
         return response()->json([
             'status' => true,
             'image_id' => $productImage->id,
@@ -68,6 +69,8 @@ class ProductImageController extends Controller
     {
         $productImage = ProductImage::find($request->id);
         if (empty($productImage)) {
+
+            session()->flash('success', 'Image not found');
             return response()->json([
                 'status' => false,
                 'message' => 'Image not found'
@@ -80,6 +83,7 @@ class ProductImageController extends Controller
 
         $productImage->delete();
 
+        session()->flash('success', 'Image deleted successfully');
         return response()->json([
             'status' => true,
             'message' => 'Image deleted successfully'

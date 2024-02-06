@@ -63,6 +63,8 @@ class SubCategoryController extends Controller
 
 
 
+            session()->flash('success', 'Sub category created successfully');
+
             return response()->json([
                 'status' => true,
                 'message' => 'Subcategory created successfully'
@@ -119,6 +121,7 @@ class SubCategoryController extends Controller
 
             // session response 
 
+            session()->flash('success', 'Sub category updated successfully');
             return response()->json([
                 'status' => true,
                 'message' => 'Sub Category updated successfully'
@@ -145,7 +148,8 @@ class SubCategoryController extends Controller
 
         $subCategory->delete();
 
-        // session message 
+        // session message
+        session()->flash('success', 'Sub category successfully deleted');
         return response()->json([
             'status' => true,
             'message' => "Sub category successfully deleted!!!"
