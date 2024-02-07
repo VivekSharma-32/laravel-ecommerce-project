@@ -144,6 +144,9 @@
                                                 placeholder="Barcode" value="{{ $product->barcode }}">
                                         </div>
                                     </div>
+
+
+
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <div class="custom-control custom-checkbox">
@@ -161,6 +164,25 @@
                                             <p class="error"></p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h2 class="h4 mb-3">Related Products</h2>
+                                <div class="mb-3">
+                                    <select multiple class="related-product w-100" name="related_products[]"
+                                        id="related_products">
+                                        @if (!empty($relatedProducts))
+                                            @foreach ($relatedProducts as $relatedProduct)
+                                                <option selected value="{{ $relatedProduct->id }}">
+                                                    {{ $relatedProduct->title }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    <p class="error"></p>
                                 </div>
                             </div>
                         </div>
@@ -241,6 +263,9 @@
                                 </div>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
 
@@ -395,5 +420,20 @@
                 })
             }
         }
+
+        $('.related-product').select2({
+            ajax: {
+                url: "{{ route('products.getProducts') }}",
+                dataType: 'json',
+                tags: true,
+                multiple: true,
+                minimumInputLength: 3,
+                processResults: function(data) {
+                    return {
+                        results: data.tags
+                    };
+                }
+            }
+        });
     </script>
 @endsection

@@ -145,6 +145,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h2 class="h4 mb-3">Related Products</h2>
+                                <div class="mb-3">
+                                    <select multiple class="related-product w-100" name="related_products[]"
+                                        id="related_products">
+
+                                    </select>
+                                    <p class="error"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card mb-3">
@@ -342,5 +355,20 @@
         function deleteImage(id) {
             $("#image-row-" + id).remove();
         }
+
+        $('.related-product').select2({
+            ajax: {
+                url: "{{ route('products.getProducts') }}",
+                dataType: 'json',
+                tags: true,
+                multiple: true,
+                minimumInputLength: 3,
+                processResults: function(data) {
+                    return {
+                        results: data.tags
+                    };
+                }
+            }
+        });
     </script>
 @endsection
