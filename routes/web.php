@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
+use App\Http\Controllers\admin\ShippingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
@@ -101,6 +102,9 @@ Route::group(['prefix' => 'admin'], function () {
         // Product images routes 
         Route::post('/product-images/update', [ProductImageController::class, 'update'])->name('product-images.update');
         Route::delete('/product-images', [ProductImageController::class, 'destroy'])->name('product-images.destroy');
+
+        // Shipping routes 
+        Route::get('/shipping', [ShippingController::class, 'create'])->name('shipping.create');
 
         // Get Slug from the db and change according to the name of the input field
         Route::get('/getSlug', function (Request $request) {
