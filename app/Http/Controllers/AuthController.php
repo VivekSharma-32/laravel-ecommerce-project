@@ -79,6 +79,11 @@ class AuthController extends Controller
 
     public function profile()
     {
+        if (session()->has('url.intended')) {
+            return redirect(session()->get('url.intended'));
+        }
+
+
         return view(('front.account.profile'));
     }
 
