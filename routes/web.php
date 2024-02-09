@@ -29,6 +29,7 @@ Route::delete('/delete-item', [CartController::class, 'deleteItem'])->name('fron
 Route::get('/checkout', [CartController::class, 'checkout'])->name('front.checkout');
 Route::post('/process-checkout', [CartController::class, 'processCheckout'])->name('front.processCheckout');
 Route::get('/thanks/{orderId}', [CartController::class, 'thankyou'])->name('front.thankyou');
+Route::post('/get-order-summary', [CartController::class, 'getOrderSummary'])->name('front.getOrderSummary');
 
 // Authentication routes 
 Route::group(['prefix' => 'account'], function () {
