@@ -7,10 +7,10 @@
         <div class="container-fluid my-2">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Create Category</h1>
+                    <h1>Create Discount Coupon Code</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="{{ route('categories.index') }}" class="btn btn-primary">Back</a>
+                    <a href="{{ route('coupons.index') }}" class="btn btn-primary">Back</a>
                 </div>
             </div>
         </div>
@@ -100,8 +100,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="slug">Starts At</label>
-                                    <input type="text" name="starts_at" id="starts_at" class="form-control"
-                                        placeholder="Starts At">
+                                    <input autocomplete="off" type="text" name="starts_at" id="starts_at"
+                                        class="form-control" placeholder="Starts At">
                                     <p></p>
                                 </div>
                             </div>
@@ -109,8 +109,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="slug">Expires At</label>
-                                    <input type="text" name="expires_at" id="expires_at" class="form-control"
-                                        placeholder="Expires At">
+                                    <input autocomplete="off" type="text" name="expires_at" id="expires_at"
+                                        class="form-control" placeholder="Expires At">
                                     <p></p>
                                 </div>
                             </div>
