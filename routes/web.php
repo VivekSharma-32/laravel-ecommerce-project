@@ -104,7 +104,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/product-images', [ProductImageController::class, 'destroy'])->name('product-images.destroy');
 
         // Shipping routes 
-        Route::get('/shipping', [ShippingController::class, 'create'])->name('shipping.create');
+        Route::get('/shipping/create', [ShippingController::class, 'create'])->name('shipping.create');
+        Route::post('/shipping', [ShippingController::class, 'store'])->name('shipping.store');
+        Route::get('/shipping/{id}', [ShippingController::class, 'edit'])->name('shipping.edit');
+        Route::put('/shipping/{id}', [ShippingController::class, 'update'])->name('shipping.update');
+        Route::delete('/shipping/{id}', [ShippingController::class, 'destroy'])->name('shipping.destroy');
 
         // Get Slug from the db and change according to the name of the input field
         Route::get('/getSlug', function (Request $request) {
