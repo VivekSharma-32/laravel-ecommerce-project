@@ -18,6 +18,7 @@
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
+        @include('admin.message')
         <div class="container-fluid">
             <div class="card">
                 <form action="" method="get">

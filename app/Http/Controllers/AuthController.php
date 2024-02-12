@@ -83,7 +83,6 @@ class AuthController extends Controller
             return redirect(session()->get('url.intended'));
         }
 
-
         return view(('front.account.profile'));
     }
 

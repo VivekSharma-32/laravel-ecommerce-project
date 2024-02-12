@@ -112,13 +112,13 @@ class ShippingController extends Controller
         if ($shippingCharge == null) {
             session()->flash('error', 'Shipping not successfully.');
             return response()->json([
-                'status' > true,
+                'status' => true,
             ]);
         }
 
         session()->flash('success', 'Shipping deleted successfully.');
         return response()->json([
-            'status' > true,
+            'status' => true,
         ]);
     }
 }

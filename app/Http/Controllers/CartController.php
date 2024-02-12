@@ -160,12 +160,9 @@ class CartController extends Controller
 
         $customerAddress = CustomerAddress::where('user_id', Auth::user()->id)->first();
 
-
-
         session()->forget('url.intended');
 
         $countries = Country::orderBy('name', 'ASC')->get();
-
 
         // Calculate shipping here 
         if ($customerAddress != null) {
