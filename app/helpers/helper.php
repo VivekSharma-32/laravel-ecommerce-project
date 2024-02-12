@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\ProductImage;
 
 function getCategories()
 {
@@ -10,4 +11,9 @@ function getCategories()
         ->with('sub_category')
         ->orderBy('id', 'DESC')
         ->get();
+}
+
+function getProductImage($productId)
+{
+    return ProductImage::where('product_id', $productId)->first();
 }
