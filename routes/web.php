@@ -34,6 +34,7 @@ Route::get('/thanks/{orderId}', [CartController::class, 'thankyou'])->name('fron
 Route::post('/get-order-summary', [CartController::class, 'getOrderSummary'])->name('front.getOrderSummary');
 Route::post('/apply-discount', [CartController::class, 'applyDiscount'])->name('front.applyDiscount');
 Route::post('/remove-discount', [CartController::class, 'removeDiscount'])->name('front.removeDiscount');
+Route::post('/add-to-wishlist', [FrontController::class, 'addToWishlist'])->name('front.addToWishlist');
 
 // applyDiscount
 
@@ -51,6 +52,8 @@ Route::group(['prefix' => 'account'], function () {
         Route::get("/my-orders", [AuthController::class, 'orders'])->name('account.orders');
         Route::get("/order-detail/{orderId}", [AuthController::class, 'orderDetail'])->name('account.orderDetail');
         Route::get("/logout", [AuthController::class, 'logout'])->name('account.logout');
+        Route::get("/my-wishlist", [AuthController::class, 'wishlist'])->name('account.wishlist');
+        Route::delete("/remove-product-from-wishlist", [AuthController::class, 'removeProductFromWishlist'])->name('account.removeProductFromWishlist');
     });
 });
 
