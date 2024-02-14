@@ -160,10 +160,23 @@
                                                 class="far fa-heart"></i></a>
 
                                         <div class="product-action">
-                                            <a class="btn btn-dark" href="javascript:void(0);"
-                                                onclick="addToCart({{ $featuredProduct->id }})">
-                                                <i class="fa fa-shopping-cart"></i> Add To Cart
-                                            </a>
+                                            @if ($featuredProduct->track_qty == 'Yes')
+                                                @if ($featuredProduct->qty > 0)
+                                                    <a class="btn btn-dark" href="javascript:void(0);"
+                                                        onclick="addToCart({{ $featuredProduct->id }})">
+                                                        <i class="fa fa-shopping-cart"></i> Add To Cart
+                                                    </a>
+                                                @else
+                                                    <a class="btn btn-danger" href="javascript:void(0);">
+                                                        <i class="fa fa-shopping-cart"></i> Out Of Stock
+                                                    </a>
+                                                @endif
+                                            @else
+                                                <a class="btn btn-dark" href="javascript:void(0);"
+                                                    onclick="addToCart({{ $featuredProduct->id }})">
+                                                    <i class="fa fa-shopping-cart"></i> Add To Cart
+                                                </a>
+                                            @endif
                                         </div>
                                 </div>
                                 <div class="card-body text-center mt-3">
@@ -211,10 +224,23 @@
                                                 class="far fa-heart"></i></a>
 
                                         <div class="product-action">
-                                            <a class="btn btn-dark" href="javascript:void(0);"
-                                                onclick="addToCart({{ $latestProduct->id }})">
-                                                <i class="fa fa-shopping-cart"></i> Add To Cart
-                                            </a>
+                                            @if ($latestProduct->track_qty == 'Yes')
+                                                @if ($latestProduct->qty > 0)
+                                                    <a class="btn btn-dark" href="javascript:void(0);"
+                                                        onclick="addToCart({{ $latestProduct->id }})">
+                                                        <i class="fa fa-shopping-cart"></i> Add To Cart
+                                                    </a>
+                                                @else
+                                                    <a class="btn btn-danger" href="javascript:void(0);">
+                                                        <i class="fa fa-shopping-cart"></i> Out Of Stock
+                                                    </a>
+                                                @endif
+                                            @else
+                                                <a class="btn btn-dark" href="javascript:void(0);"
+                                                    onclick="addToCart({{ $latestProduct->id }})">
+                                                    <i class="fa fa-shopping-cart"></i> Add To Cart
+                                                </a>
+                                            @endif
                                         </div>
                                 </div>
                                 <div class="card-body text-center mt-3">

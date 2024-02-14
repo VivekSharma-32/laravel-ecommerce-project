@@ -68,7 +68,7 @@
                                 @endforeach
                             @else
                                 <div>
-                                    <h3 class="text-center py-4">Your wishlist is empty!!!</h3>
+                                    <h3 class="h5 text-center py-4">Your wishlist is empty!!!</h3>
                                 </div>
                             @endif
                         </div>

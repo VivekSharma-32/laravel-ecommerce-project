@@ -129,13 +129,28 @@
                                                         class="card-img-top">
                                                 @endif
                                             </a>
-                                            <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
+                                            <a class="whishlist" href="javascript:void(0)"
+                                                onclick="addToWishlist({{ $product->id }})"><i
+                                                    class="far fa-heart"></i></a>
                                             <div class="product-action">
-                                                <a class="btn btn-dark" href="javascript:void(0);"
-                                                    onclick="addToCart({{ $product->id }})">
-                                                    <i class="fa fa-shopping-cart"></i> Add To Cart
-                                                </a>
+                                                @if ($product->track_qty == 'Yes')
+                                                    @if ($product->qty > 0)
+                                                        <a class="btn btn-dark" href="javascript:void(0);"
+                                                            onclick="addToCart({{ $product->id }})">
+                                                            <i class="fa fa-shopping-cart"></i> Add To Cart
+                                                        </a>
+                                                    @else
+                                                        <a class="btn btn-danger" href="javascript:void(0);">
+                                                            <i class="fa fa-shopping-cart"></i> Out Of Stock
+                                                        </a>
+                                                    @endif
+                                                @else
+                                                    <a class="btn btn-dark" href="javascript:void(0);"
+                                                        onclick="addToCart({{ $product->id }})">
+                                                        <i class="fa fa-shopping-cart"></i> Add To Cart
+                                                    </a>
+                                                @endif
+
                                             </div>
                                         </div>
                                         <div class="card-body text-center mt-3">
