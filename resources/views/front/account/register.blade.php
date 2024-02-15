@@ -52,14 +52,14 @@
         $("#registrationForm").submit(function(event) {
             event.preventDefault();
 
-            $("button[ttype='submit']").prop('disabled', true);
+            $("button[type='submit']").prop('disabled', true);
             $.ajax({
                 url: "{{ route('account.processRegister') }}",
                 type: 'post',
                 data: $(this).serializeArray(),
                 dataType: 'json',
                 success: function(response) {
-                    $("button[ttype='submit']").prop('disabled', false);
+                    $("button[type='submit']").prop('disabled', false);
                     var errors = response.errors;
                     if (response.status == false) {
                         if (errors.name) {

@@ -71,13 +71,13 @@ class AuthController extends Controller
             //
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-                if (session()->has('url.intended')) {
-                    return redirect(session()->get('url.intended'));
-                }
+                // if (session()->has('url.intended')) {
+                //     return redirect(session()->get('url.intended'));
+                // }
 
                 return redirect()->route('account.profile');
             } else {
-                // session()->flash('error', 'Either email or password is incorrect');
+                session()->flash('error', 'Either email or password is incorrect');
                 return redirect()->route('account.login')
                     ->withInput($request->only('email'))
                     ->with('error', 'Either email or password is incorrect');
@@ -249,5 +249,43 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
         ]);
+    }
+
+    public function showChangePasswordForm(Request $request)
+    {
+        return view('front.account.change-password');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required|min:5',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        if ($validator->passes()) {
+
+            $user = User::select('id', 'password')->where('id', Auth::user()->id)->first();
+            if (!Hash::check($request->old_password, $user->password)) {
+                session()->flash('error', 'Your old password is incorrect, please try again');
+                return response()->json([
+                    'status' => true,
+                ]);
+            }
+            User::where('id', $user->id)->update([
+                'password' => Hash::make($request->new_password)
+            ]);
+
+            session()->flash('success', 'You have successfully changed your password');
+            return response()->json([
+                'status' => true,
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
     }
 }
