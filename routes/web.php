@@ -37,6 +37,7 @@ Route::post('/get-order-summary', [CartController::class, 'getOrderSummary'])->n
 Route::post('/apply-discount', [CartController::class, 'applyDiscount'])->name('front.applyDiscount');
 Route::post('/remove-discount', [CartController::class, 'removeDiscount'])->name('front.removeDiscount');
 Route::post('/add-to-wishlist', [FrontController::class, 'addToWishlist'])->name('front.addToWishlist');
+Route::get('/page/{slug}', [FrontController::class, 'page'])->name('front.page');
 
 // applyDiscount
 
