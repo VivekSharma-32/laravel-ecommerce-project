@@ -132,6 +132,10 @@
     margin-left: -5px;
 }
 
+.star-rating.product {
+    font-size: 1em;
+}
+
 .back-stars {
     color: #ccc;
     position: relative;
